@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title th:text="'Заявка №' + ${id}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/styles/style.css}" rel = "stylesheet" />
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<nav th:insert="blocks/nav_menu :: nav"></nav>
+
+<h2 th:text="'Заявка №' + ${id}" class="title_style"></h2>
+<div class="textcols">
+    <div class="textcols-item">
+        <h2>Решение о кредите</h2>
+        <p th:text="'Статус: ' + ${status}" />
+        <p th:text="'Срок (дни): ' + ${period}" />
+        <p th:text="'Одобренная сумма кредита: ' + ${sum} + ' руб.'" />
+    </div>
+    <div class="textcols-item">
+        <h2>Информация о клиенте</h2>
+        <p th:text="'ФИО: ' + ${fio}" />
+        <p th:text="'Паспортные данные: ' + ${passport}" />
+        <p th:text="'Семейное положение: ' + ${family_status}" />
+        <p th:text="'Адрес прописки: ' + ${address}" />
+        <p th:text="'Контактный телефон: ' + ${phone}" />
+        <h3>Сведения о занятости</h3>
+        <p th:text="'Должность: ' + ${job_title}" />
+        <p th:text="'Организация: ' + ${job_organization}" />
+        <p th:text="'Период работы: ' + ${job_start} + ' — ' + ${job_finish}" />
+    </div>
+</div>
+<form action="/opened_agreement">
+    <input type="hidden" name="id" th:value="${id}">
+    <button class="btn_style" type="submit" th:if="${status == 'Одобрен' and have_agreement == 'false'}">
+        Подписать договор</button>
+    <div class="title_style">
+        <p th:if="${have_agreement == 'true'}">
+            Договор по этой заявке уже существует. Вы можете перейти к нему по данной ссылке -> </p>
+
+        <p><a th:href="'/agreements/' + ${agreementID}" th:if="${have_agreement == 'true'}" class="link_class">
+            Договор по данной заявке</a></p>
+    </div>
+</form>
+</body>
+</html>

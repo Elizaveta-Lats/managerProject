@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Главная страница</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/styles/style.css}" rel = "stylesheet" />
+</head>
+<body>
+    <header th:insert="blocks/header :: header"></header>
+    <nav th:insert="blocks/nav_menu :: nav"></nav>
+    <img th:src="@{/images/meme.png}" alt="Просто мем..." width="650" height="550" vspace="10">
+    <img th:src="@{/images/meme-kotenok.jpg}" alt="Тоже просто мем..." width="650" height="550" vspace="10" hspace="10">
+</body>
+</html>

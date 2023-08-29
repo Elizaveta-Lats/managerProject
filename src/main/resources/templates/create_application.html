@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+  <title>Создание заявки</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/styles/style.css}" rel = "stylesheet" />
+</head>
+<body>
+  <header th:insert="blocks/header :: header"></header>
+  <nav th:insert="blocks/nav_menu :: nav"></nav>
+
+  <div class="input_form">
+  <form action="/create_application" method="post">
+    <h2>НОВАЯ ЗАЯВКА</h2> <br>
+    <label><b>ФИО</b></label><br>
+    <input type="text" name="fio" required> <br>
+    <label><b>Серия и номер паспорта</b></label><br>
+    <input type="text" name="passport" pattern="[0-9]{4}\s[0-9]{6}" placeholder="0000 000000" required> <br>
+    <label><b>Семейное положение</b></label><br>
+    <input type="text" name="family_status"> <br>
+    <label><b>Адрес прописки</b></label><br>
+    <input type="text" name="address" required> <br>
+    <label><b>Контактный телефон</b></label><br>
+    <input type="tel" pattern="8-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+           name="phone_number" placeholder="8-xxx-xxx-xx-xx" required><br>
+    <label><b>Должность</b></label><br>
+    <input type="text" name="job_title"> <br>
+    <label><b>Название организации</b></label><br>
+    <input type="text" name="job_organization"> <br>
+    <label><b>Начало работы (месяц и год)</b></label><br>
+    <input type="text" name="job_period_start"> <br>
+    <label><b>Конец работы (месяц и год)</b></label><br>
+    <input type="text" name="job_period_finish"> <br>
+    <label><b>Сумма кредита</b></label><br>
+    <input type="number" name="credit_sum" required> <br>
+
+    <button type="submit" class="btn_style">Сохранить заявку</button>
+
+  </form>
+  </div>
+</body>
+</html>

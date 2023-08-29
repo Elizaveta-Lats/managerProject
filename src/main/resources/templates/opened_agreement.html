@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+  <title>Кредитный договор</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/styles/style.css}" rel = "stylesheet" />
+</head>
+<body>
+  <header th:insert="blocks/header :: header"></header>
+  <nav th:insert="blocks/nav_menu :: nav"></nav>
+
+
+
+  <div class="textcols">
+    <h1 th:text="'Договор по заявке №' + ${app_id}"/>
+    <div class="textcols-item">
+      <h2>Решение о кредите</h2>
+      <p th:text="'Статус: ' + ${status}" />
+      <p th:text="'Срок (дни): ' + ${period}" />
+      <p th:text="'Одобренная сумма кредита: ' + ${sum} + ' руб.'" />
+      <br><br>
+      <p th:text="'Дата подписания договора: ' + ${signing_date}" />
+      <p th:text="'Статус подписи: ' + ${signing_status}" />
+    </div>
+    <div class="textcols-item">
+      <h2>Информация о клиенте</h2>
+      <p th:text="'ФИО: ' + ${fio}" />
+      <p th:text="'Паспортные данные: ' + ${passport}" />
+      <p th:text="'Семейное положение: ' + ${family_status}" />
+      <p th:text="'Адрес прописки: ' + ${address}" />
+      <p th:text="'Контактный телефон: ' + ${phone}" />
+      <h3>Сведения о занятости</h3>
+      <p th:text="'Должность: ' + ${job_title}" />
+      <p th:text="'Организация: ' + ${job_organization}" />
+      <p th:text="'Период работы: ' + ${job_start} + ' — ' + ${job_finish}" />
+    </div>
+  </div>
+
+  <form action="/opened_agreement" method="post" th:if="${signing_date == ''}">
+    <input type="hidden" name="id" th:value="${app_id}">
+    <button class="btn_style" type="submit" name="save_with_sign" th:if="${signing_status == 'Не подписан'}">
+      Подписать и сохранить</button>
+    <button class="btn_style" type="submit" name="save_without_sign" th:if="${signing_status == 'Не подписан'}">
+      Сохранить без подписания</button>
+  </form>
+  <form action="/agreement_for_update" method="post" th:if="${signing_date == null}">
+    <input type="hidden" name="agree_id" th:value="${agreement_id}">
+    <button class="btn_style" type="submit" name="finally_sign">Подписать и обновить</button>
+  </form>
+</body>
+</html>
